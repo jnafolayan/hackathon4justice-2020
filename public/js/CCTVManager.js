@@ -15,10 +15,9 @@ function CCTVManager(domElement) {
       ctx.drawImage(video, 0, 0);
 
       const b64Img = canvas.toDataURL("image/png");
-      throw b64Img;
-      faceDetection(this, video, b64Img);
+      faceDetection(this, video, b64Img.replace("data:image/png;base64,", ""));
     }
-  }, 2000);
+  }, 500);
 }
 
 CCTVManager.prototype.flush = function flush() {
@@ -27,11 +26,11 @@ CCTVManager.prototype.flush = function flush() {
 }
 
 CCTVManager.prototype.alarm = function alarm(video) {
-  video.style.backgroundColor = "hsla(0, 100%, 50%, 0.3)";
+  video.parentNode.style.borderColor = "hsla(0, 100%, 50%, 1)";
 }
 
 CCTVManager.prototype.unalarm = function unalarm(video) {
-  video.style.backgroundColor = "transparent";
+  video.parentNode.style.borderColor = "#aaa";
 }
 
 CCTVManager.prototype.addVideo = function addVideo(stream) {
@@ -63,7 +62,7 @@ function faceDetection(manager, video, b64Img) {
   .then(
     function(res) {
       var data = res.outputs[0].data.regions;
-      if (data !== null) {
+      if (data != null && data.length) {
         for (var i = 0; i < data.length; i++) {
           // imageDetails.clarifaiFaces.push(data[i].region_info.bounding_box);
         }
