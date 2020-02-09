@@ -1,0 +1,14 @@
+{
+  "name": "multiplex-hack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jnafolayan/multiplex-hack",
+  "author": "John Afolayan <jnafolayan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start:peerjs": "peerjs --port 9000 --key peerjs --path /"
+  },
+  "dependencies": {
+    "peer": "^0.2.10"
+  }
+}
